@@ -187,6 +187,10 @@ const Home = (props) => {
                 display: true,
                 text: 'Active vs Inactive Jobs',
             },
+            style: {
+                height: '288px',
+                width: '288px',
+            }
         },
     };
 
@@ -235,38 +239,42 @@ const Home = (props) => {
     return (
         <>
 
-            <div style={{ width: '98%', display: 'flex', justifyContent: 'center', margin: '5px'}}>
+            <div style={{ width: '98%', display: 'flex', justifyContent: 'center', margin: '5px' }}>
 
-                    <div style={{ height: '300px', width: '45%', border: '2px solid black', margin:'10px', display:'flex', justifyContent:'center', alignItems:'center' }}>
-                        <Bar
-                            options={option1}
-                            data={data2}
-                        />
-                    </div>
+                <div style={{ height: '300px', width: '45%', border: '2px solid black', margin: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Bar
+                        options={option1}
+                        data={data2}
+                    />
+                </div>
 
-                    <div style={{ height: '300px', width: '45%', border: '2px solid black', margin:'10px',padding:'5px', display:'flex', justifyContent:'center'}}>
-                        
-                        <Pie
-                            options={option2}
-                            data={data1}
-                        />;
-                    </div>
+                <div style={{ height: '300px', width: '45%', border: '2px solid black', margin: '10px', padding: '5px', display: 'flex', justifyContent: 'center' }}>
+
+                    <Pie
+                        options={option2}
+                        data={data1}
+
+                    />
+                </div>
 
             </div>
 
 
-            <div className='row' style={{ border: '2px solid black', margin: '10px', padding: '5px' }}>
+            <div className='row' style={{ border: '2px solid black' }}>
                 {
                     jobs.map(job => {
 
                         return <div className=" col-md-3 p-3" key={job._id}>
-                            <div className='card'>
+                            {/* <div className='card'> */}
+
+                            <div className="card mb-3" >
+
 
                                 <Link to={`/jobs/${job._id}`} style={{
                                     textDecoration: "none",
                                     color: "black"
                                 }}>
-                                    {
+                                    {/* {
                                         job.images.length == 0
                                             ?
                                             <img src={require("../asset/no-image.jpg")} className="card-img-top img-thumbnail" alt="..." />
@@ -280,7 +288,29 @@ const Home = (props) => {
                                             <p className="card-text">{job.company}</p>
                                             <h5 className="card-title">{job.title}</h5>
                                         </div>
+                                    </div> */}
+
+                                    <div className="row g-0">
+                                        <div className="col-md-4">
+                                            {
+                                                job.images.length == 0
+                                                    ?
+                                                    <img src={require("../asset/no-image.jpg")} className="card-img-top img-thumbnail" alt="..." style={{ height: '100%', padding: '5px', margin: '0px' }} />
+                                                    :
+                                                    <img src={`http://localhost:8000/${job.images}`} className="card-img-top img-thumbnail" alt="..." style={{ height: '100%', padding: '5px', margin: '0px' }} />
+
+                                            }
+                                        </div>
+
+                                        <div className="col-md-8">
+                                            <div className="card-body">
+                                                <h5 className="card-title">{job.company}</h5>
+                                                <h6 className="card-title">:{job.title}</h6>
+
+                                            </div>
+                                        </div>
                                     </div>
+
 
                                 </Link>
 
@@ -308,8 +338,10 @@ const Home = (props) => {
                                     </div>
                                 </RecruiterComponent>
 
+
                             </div>
                         </div>
+
                     })
                 }
 
